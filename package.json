@@ -1,0 +1,17 @@
+{
+  "name": "bot-primatoso",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.4.0",
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.4.0"
+  },
+  "engines": {
+    "node": "17.x"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  }
+}
