@@ -1,7 +1,6 @@
 import { Client as client, Intents, MessageActionRow, MessageButton } from "discord.js";
 import { config } from "dotenv";
 config();
-
 const Client = new client({
   intents: [
     Intents.FLAGS.GUILDS,
@@ -33,16 +32,19 @@ Client.on("messageCreate", async (message) => {
     ],
     components: [
         Row,
-    ]
+    ],
+    content:"Tu mensaje se va a eliminar."
   });
 
   const collector = msg.createMessageComponentCollector({componentType: "BUTTON",time: 30000 })
 
   collector.on("collect", i=>{
+if(i.member == null) return 
+if(message.member == null) return
       if(i.member.user.id !== message.member.user.id) return i.reply({content:"No puedes usar este boton.", ephemeral: true})
       if (i.customId == "ok") {
           message.delete()
-          msg.edit({components:[]})
+          msg.edit({components:[], content:undefined})
     } else {
         msg.delete()
     }
@@ -50,7 +52,8 @@ Client.on("messageCreate", async (message) => {
 
   })
   collector.on("end", ()=>{
-      msg.delete();        
+    
+      msg.delete().catch(_=>console.log("xd"))        
 })
 
 });
